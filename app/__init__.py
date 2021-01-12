@@ -1,9 +1,18 @@
+from app import routes
 from flask import Flask
-
-# print("NAME:",__name__)
+import os
 
 app = Flask(__name__)
-# app.config.get()
-app.config.from_object(Config)
+app.config.update({'SECRET_KEY': os.environ.get('SECRET_KEY')})
+app.register_blueprint(routes.bp)
 
-from app import routes  # noqa
+
+# from flask import Flask
+
+# # print("NAME:",__name__)
+
+# app = Flask(__name__)
+# # app.config.get()
+# app.config.from_object(Config)
+
+# from app import routes  # noqa
