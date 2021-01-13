@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+import psycopg2
 import os
 
 bp = Blueprint('main', __name__, url_prefix='')
@@ -16,8 +17,8 @@ def main():
     with psycopg2.connect(**CONNECTION_PARAMETERS) as conn:
         with conn.cursor() as curs:
             curs.execute(
-                SELECT id, name, start_datetime, end_datetime
+                """SELECT id, name, start_datetime, end_datetime
                 FROM appointments
-                ORDER BY start_datetime
+                ORDER BY start_datetime"""
             )
             return render_template('main.html')
